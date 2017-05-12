@@ -1,0 +1,13 @@
+.navbar nav li a{
+  line-height:150px;
+  height:150px;
+  padding-top:0;
+}
+
+
+.reqitem {
+  margin:5px;
+  padding:5px;
+  background-color:#d8d8d8;
+  font-size:20px;
+}
