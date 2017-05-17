@@ -15,44 +15,74 @@
         <a class="navbar-brand" href="#">SAGAM</a>
       </div>
       <ul class="nav navbar-nav">
-        <li><p class="navbar-text"> 생활관 </p></li>
+        <li><p class="navbar-text">현재 생활관 : </p></li>
       	<li class="dropdown">
       	  <a href="#" class="dropdown-toggle" id="halls" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
       	    아름관
       	    <span class="caret"></span>
       	  </a>
       	  <ul class="dropdown-menu" aria-labelledby="halls">
-      	    <li><a href="#">Action</a></li>
-      	    <li><a href="#">Another action</a></li>
-      	    <li><a href="#">Something else here</a></li>
+      	    <li><a href="#">진리관</a></li>
+      	    <li><a href="#">성실관</a></li>
+      	    <li><a href="#">희망관</a></li>
       	  </ul>
       	</li>
-      	<li><a href="#">현재 수리 요청 목록</a></li>
+	<li><a href="#">현재 수리 요청 목록</a></li>
+	<li><span class="step">1</span></li>
       	<li><a href="#">모든 수리 요청 목록</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+	<li><a href="#">로그인</a></li>
       </ul>
     </div>
   </nav>
 
-  <div class="c_req">
-    <div class="container">
-      <div class="row main">
-        <div class="col-md-10">
-  	      <h3 class="display-2">새로운 요청</h3>
-        </div>
-        <div class="col-md-1"><h3 class="display-2">승인</h3></div>
-        <div class="col-md-1"><h3 class="display-2">추가 요청</h3></div>
+    <div class="container_fluid">
+      <div class="col-md-6">
+	
+	<h3 class>새로운 요청</h3>
+	<table class="table request">
+	  <tr>
+	    <th style="width:10%">날짜</th>
+	    <th style="width:10%">방</th>
+	    <th style="width:60%">요청</th>
+	    <th style="width:10%">승인</th>
+	    <th style="witdh:10%">다른 작업</th>
+	  </tr>
+	  <tr>
+	    <td>2017/5/5</td>
+	    <td>314호</td>
+	    <td>에어컨이 작동을 안합니다.</td>
+	    <td><button class="btn btn-primary">승인</button></td>
+	    <td><button class="btn btn-success">기타</button></td>
+	  </tr>
+	</table>
+	<div class="text-center">
+	  <a class="btn btn-default btn-lg" href="#" role="button">새로운 요청 추가하기</a>	
+	</div>
       </div>
-      <div class="reqitem">
-        <div class="row">
-        	<div class="col-md-2">2017/5/10 수</div>
-        	<div class="col-md-1">101호</div>
-        	<div class="col-md-7">요청하고있어요오오오</div>
-        	<div class="col-md-1"><button>승인</button></div>
-        	<div class="col-md-1"><button>수정</button></div>
-        </div>
+
+      <div class="col-md-6">
+	
+	<h3 class>승인된 요청</h3>
+	<table class="table request">
+	  <tr>
+	    <th style="width:10%">날짜</th>
+	    <th style="width:10%">방</th>
+	    <th style="width:60%">요청</th>
+	    <th style="width:10%">승인된 날짜</th>
+	    <th style="witdh:10%">완료</th>
+	  </tr>
+	  <tr>
+	    <td>2017/5/5</td>
+	    <td>314호</td>
+	    <td>에어컨이 작동을 안합니다.</td>
+	    <td>2017/5/7</td>
+	    <td><button class="btn btn-success pull-right">완료</button></td>
+	  </tr>
+	</table>
       </div>
     </div>
-  </div>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Latest compiled and minified JavaScript -->
