@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SAGAM!!</title>
+  <title>SAGAM</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
@@ -41,11 +41,11 @@
   <div class="container_fluid">
     <div class="row">
       <div id = "newRequestTable" class="col-md-6">
-	<h3>새로운 요청</h3>
+	<div class="title">새로운 요청</div>
 	<table class="table request">
 	  <tr>
 	    <th style="width:10%">요청 날짜</th>
-	    <th style="width:15%">방</th>
+	    <th style="width:15%">위치</th>
 	    <th style="width:55%">요청</th>
 	    <th style="width:10%">승인</th>
 	    <th style="witdh:10%">다른 작업</th>
@@ -67,13 +67,10 @@
 	    </td>
 	  </tr>
 	</table>
-	<div class="col-md-offset-4 col-md-4">
-	  <a class="btn btn-default btn-lg" href="#" role="button">새로운 요청 추가하기</a>
-	</div>
       </div>
 
       <div id="approvedRequestTable" class="col-md-6">
-	<h3 class>승인된 요청</h3>
+	<div class="title">전달된 요청</div>
 	<table class="table request">
 	  <tr>
 	    <th style="width:10%">요청 날짜</th>
@@ -87,17 +84,20 @@
 	    <td>301호</td>
 	    <td>문이 열리지 않아요</td>
 	    <td>2017/5/4</td>
-	    <td><button class="btn btn-success">완료</button></td>
+	    <td><button class="btn btn-success">수리 완료</button></td>
 
 	  </tr>
 	</table>
+            <div class="col-md-offset-4 col-md-4">
+              <a class="btn btn-default btn-lg" href="#" role="button">새로운 요청 추가하기</a>
+            </div>
       </div>
     </div>
   </div>
 
 <!-- This DOM is in index.html now, but needs to be moved by VUE.js" -->
     <div class="container">
-      <h3>모든 수리 요청 기록</h3>
+      <div class="title">모든 수리 요청 기록</div>
       <table class="table">
 	<tr>
 	  <th style="width:10%">날짜</th>
@@ -112,11 +112,26 @@
 	  <td>수리 완료</td>
       </table>
     </div>
+
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBWyjl0go31JN8q_ol_9q9rCNbDFHCyhzA",
+      authDomain: "sagam-ba36f.firebaseapp.com",
+      databaseURL: "https://sagam-ba36f.firebaseio.com",
+      projectId: "sagam-ba36f",
+      storageBucket: "sagam-ba36f.appspot.com",
+      messagingSenderId: "716070640170"
+    };
+    firebase.initializeApp(config);
+  </script>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <script src="https://unpkg.com/vue"></script>
+
 </body>
 </html>

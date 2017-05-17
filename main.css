@@ -5,11 +5,15 @@
 }
 
 .container_fluid {
-  width: 94%;
-  margin: 3%;
+  width: 76%;
+  margin: 3% 12% 5% 12%;
 }
 
-h3 {
+.title {
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin: 3px;
+  padding-left: 10px;
   background-color: #34515e;
   color: #FFFFFF;
   border-radius: 2px;
