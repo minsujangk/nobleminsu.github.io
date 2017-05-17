@@ -4,6 +4,7 @@
   <title>SAGAM!!</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="main.css">
   <meta charset="utf-8">
 </head>
@@ -39,13 +40,13 @@
 
   <div class="container_fluid">
     <div class="row">
-      <div id = "newRequestTable" class="col-md-6">	
+      <div id = "newRequestTable" class="col-md-6">
 	<h3>새로운 요청</h3>
 	<table class="table request">
 	  <tr>
-	    <th style="width:10%">날짜</th>
-	    <th style="width:10%">방</th>
-	    <th style="width:60%">요청</th>
+	    <th style="width:10%">요청 날짜</th>
+	    <th style="width:15%">방</th>
+	    <th style="width:55%">요청</th>
 	    <th style="width:10%">승인</th>
 	    <th style="witdh:10%">다른 작업</th>
 	  </tr>
@@ -67,18 +68,18 @@
 	  </tr>
 	</table>
 	<div class="col-md-offset-4 col-md-4">
-	  <a class="btn btn-default btn-lg" href="#" role="button">새로운 요청 추가하기</a>	
+	  <a class="btn btn-default btn-lg" href="#" role="button">새로운 요청 추가하기</a>
 	</div>
       </div>
 
-      <div id="approvedRequestTable" class="col-md-6">	
+      <div id="approvedRequestTable" class="col-md-6">
 	<h3 class>승인된 요청</h3>
 	<table class="table request">
 	  <tr>
-	    <th style="width:10%">날짜</th>
-	    <th style="width:10%">방</th>
-	    <th style="width:60%">요청</th>
-	    <th style="width:10%">승인된 날짜</th>
+	    <th style="width:10%">요청 날짜</th>
+	    <th style="width:15%">위치</th>
+	    <th style="width:55%">요청</th>
+	    <th style="width:10%">승인 날짜</th>
 	    <th style="witdh:10%">완료</th>
 	  </tr>
 	  <tr>
@@ -100,7 +101,7 @@
       <table class="table">
 	<tr>
 	  <th style="width:10%">날짜</th>
-	  <th style="width:10%">방</th>
+	  <th style="width:10%">위치</th>
 	  <th style="width:70%">요청</th>
 	  <th style="width:10%">현재 상태</th>
 	</tr>
