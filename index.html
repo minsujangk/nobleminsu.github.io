@@ -70,27 +70,26 @@
       </div>
 
       <div id="approvedRequestTable" class="col-md-6">
-	<div class="title">전달된 요청</div>
-	<table class="table request">
-	  <tr>
-	    <th style="width:10%">요청 날짜</th>
-	    <th style="width:15%">위치</th>
-	    <th style="width:55%">요청</th>
-	    <th style="width:10%">승인 날짜</th>
-	    <th style="witdh:10%">완료</th>
-	  </tr>
-	  <tr>
-	    <td>2017/5/3</td>
-	    <td>301호</td>
-	    <td>문이 열리지 않아요</td>
-	    <td>2017/5/4</td>
-	    <td><button class="btn btn-success">수리 완료</button></td>
-
-	  </tr>
-	</table>
-            <div class="col-md-offset-4 col-md-4">
-              <a class="btn btn-default btn-lg" href="#" role="button">새로운 요청 추가하기</a>
-            </div>
+        <div class="title">전달된 요청</div>
+        <table class="table request" id="app">
+          <tr>
+            <th style="width:10%">요청 날짜</th>
+            <th style="width:15%">위치</th>
+            <th style="width:55%">요청</th>
+            <th style="width:10%">승인 날짜</th>
+            <th style="witdh:10%">완료</th>
+          </tr>
+          <tr v-for="list in lists">
+            <td>{{list.date}}</td>
+            <td>{{list.location}}</td>
+            <td>{{list.content}}</td>
+            <td>{{list.deliveryDate}}</td>
+            <td><button class="btn btn-success">수리 완료</button></td>
+          </tr>
+        </table>
+        <div class="col-md-offset-4 col-md-4">
+          <a class="btn btn-default btn-lg" href="#" role="button">새로운 요청 추가하기</a>
+        </div>
       </div>
     </div>
   </div>
@@ -132,6 +131,19 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <script src="https://unpkg.com/vue"></script>
-
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      lists: [
+        {content: '에어컨이 작동을 안 합니다', date: '2017/5/5', location: '314호', status: 'new', deliveryDate: '2017/5/5'},
+        {content: '문이 열리지 않아요', date: '2017/5/3', location: '301호', status: 'delivered', deliveryDate: '2017/5/5'},
+        {content: '에어컨이 작동을 안 합니다', date: '2017/5/5', location: '314호', status: 'complete', deliveryDate: '2017/5/5'},
+        {content: '에어컨이 작동을 안 합니다', date: '2017/5/5', location: '314호', status: 'delivered', deliveryDate: '2017/5/5'},
+        {content: '에어컨이 작동을 안 합니다', date: '2017/5/5', location: '314호', status: 'complete', deliveryDate: '2017/5/5'}
+      ]
+    }
+  })
+  </script>
 </body>
 </html>
