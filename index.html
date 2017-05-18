@@ -17,20 +17,6 @@
         <a class="navbar-brand" href="#">SAGAM</a>
       </div>
       <ul class="nav navbar-nav">
-        <li>
-          <p class="navbar-text">현재 생활관 : </p>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" id="halls" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-      	    아름관
-      	    <span class="caret"></span>
-      	  </a>
-          <ul class="dropdown-menu" aria-labelledby="halls">
-            <li><a href="#">진리관</a></li>
-            <li><a href="#">성실관</a></li>
-            <li><a href="#">희망관</a></li>
-          </ul>
-        </li>
         <li><a href="#">현재 수리 요청 목록</a></li>
         <li><span class="step">1</span></li>
         <li><a href="#">모든 수리 요청 기록</a></li>
@@ -38,10 +24,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">로그인</a></li>
       </ul>
+      <div class="col-md-3" style="margin: 0 auto; float: none; margin-top: 7px">
+        <select class="form-control">
+          <option>성실관</option>
+          <option>아름관</option>
+          <option>진리관</option>
+          <option>희망관</option>
+        </select>
+      </div>
     </div>
   </nav>
 
-  <div class="container_fluid" id="app-request">
+  <div class="container_fluid">
+    <div class="clearfix"></div>
     <div class="row">
       <div id="newRequestTable" class="col-md-6">
         <div class="title">새로운 요청</div>
