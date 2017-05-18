@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>SAGAM</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -11,62 +12,80 @@
 
 <body>
   <nav class="navbar navbar-default">
-    <div class = "container-fluid">
+    <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">SAGAM</a>
       </div>
       <ul class="nav navbar-nav">
-        <li><p class="navbar-text">현재 생활관 : </p></li>
-      	<li class="dropdown">
-      	  <a href="#" class="dropdown-toggle" id="halls" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <li>
+          <p class="navbar-text">현재 생활관 : </p>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" id="halls" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
       	    아름관
       	    <span class="caret"></span>
       	  </a>
-      	  <ul class="dropdown-menu" aria-labelledby="halls">
-      	    <li><a href="#">진리관</a></li>
-      	    <li><a href="#">성실관</a></li>
-      	    <li><a href="#">희망관</a></li>
-      	  </ul>
-      	</li>
-	<li><a href="#">현재 수리 요청 목록</a></li>
-	<li><span class="step">1</span></li>
-      	<li><a href="#">모든 수리 요청 기록</a></li>
+          <ul class="dropdown-menu" aria-labelledby="halls">
+            <li><a href="#">진리관</a></li>
+            <li><a href="#">성실관</a></li>
+            <li><a href="#">희망관</a></li>
+          </ul>
+        </li>
+        <li><a href="#">현재 수리 요청 목록</a></li>
+        <li><span class="step">1</span></li>
+        <li><a href="#">모든 수리 요청 기록</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-	<li><a href="#">로그인</a></li>
+        <li><a href="#">로그인</a></li>
       </ul>
     </div>
   </nav>
 
-  <div class="container_fluid">
+  <div class="container_fluid" id="app-request">
     <div class="row">
-      <div id = "newRequestTable" class="col-md-6">
-	<div class="title">새로운 요청</div>
-	<table class="table request">
-	  <tr>
-	    <th style="width:10%">요청 날짜</th>
-	    <th style="width:15%">위치</th>
-	    <th style="width:55%">요청</th>
-	    <th style="width:10%">승인</th>
-	    <th style="witdh:10%">다른 작업</th>
-	  </tr>
-	  <tr>
-	    <td>2017/5/5</td>
-	    <td>314호</td>
-	    <td>에어컨이 작동을 안합니다.</td>
-	    <td><button class="btn btn-primary">승인</button></td>
-	    <td>
-	      <div class="btn-group">
-	      <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div id="newRequestTable" class="col-md-6">
+        <div class="title">새로운 요청</div>
+        <table class="table request">
+          <tr>
+            <th style="width:10%">요청 날짜</th>
+            <th style="width:15%">위치</th>
+            <th style="width:55%">요청</th>
+            <th style="width:10%">승인</th>
+            <th style="witdh:10%">다른 작업</th>
+          </tr>
+          <tr>
+            <td>2017/5/5</td>
+            <td>314호</td>
+            <td>에어컨이 작동을 안합니다.</td>
+            <td><button class="btn btn-primary">승인</button></td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		더 보기 <span class="caret"></span></button>
-	      <ul class="dropdown-menu">
-		<li><a href="#">수정</a></li>
-		<li><a href="#">삭제</a></li>
-	      </ul>
-	    </div>
-	    </td>
-	  </tr>
-	</table>
+                <ul class="dropdown-menu">
+                  <li><a href="#">수정</a></li>
+                  <li><a href="#">삭제</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          <tr v-for="list in requests">
+            <td>{{list.date}}</td>
+            <td>{{list.location}}</td>
+            <td>{{list.content}}</td>
+            <td><button class="btn btn-primary">승인</button></td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		더 보기 <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">수정</a></li>
+                  <li><a href="#">삭제</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
 
       <div id="approvedRequestTable" class="col-md-6">
@@ -94,23 +113,23 @@
     </div>
   </div>
 
-<!-- This DOM is in index.html now, but needs to be moved by VUE.js" -->
-    <div class="container">
-      <div class="title">모든 수리 요청 기록</div>
-      <table class="table">
-	<tr>
-	  <th style="width:10%">날짜</th>
-	  <th style="width:10%">위치</th>
-	  <th style="width:70%">요청</th>
-	  <th style="width:10%">현재 상태</th>
-	</tr>
-	<tr>
-	  <td>2017/5/1</td>
-	  <td>105호</td>
-	  <td>불이 안켜져요</td>
-	  <td>수리 완료</td>
-      </table>
-    </div>
+  <!-- This DOM is in index.html now, but needs to be moved by VUE.js" -->
+  <div class="container">
+    <div class="title">모든 수리 요청 기록</div>
+    <table class="table">
+      <tr>
+        <th style="width:10%">날짜</th>
+        <th style="width:10%">위치</th>
+        <th style="width:70%">요청</th>
+        <th style="width:10%">현재 상태</th>
+      </tr>
+      <tr>
+        <td>2017/5/1</td>
+        <td>105호</td>
+        <td>불이 안켜져요</td>
+        <td>수리 완료</td>
+    </table>
+  </div>
 
   <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
   <script>
@@ -131,19 +150,45 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <script src="https://unpkg.com/vue"></script>
+  <script src="./manage_request.js"></script>
   <script>
-  var app = new Vue({
-    el: '#app',
-    data: {
-      lists: [
-        {content: '에어컨이 작동을 안 합니다', date: '2017/5/5', location: '314호', status: 'new', deliveryDate: '2017/5/5'},
-        {content: '문이 열리지 않아요', date: '2017/5/3', location: '301호', status: 'delivered', deliveryDate: '2017/5/5'},
-        {content: '에어컨이 작동을 안 합니다', date: '2017/5/5', location: '314호', status: 'complete', deliveryDate: '2017/5/5'},
-        {content: '에어컨이 작동을 안 합니다', date: '2017/5/5', location: '314호', status: 'delivered', deliveryDate: '2017/5/5'},
-        {content: '에어컨이 작동을 안 합니다', date: '2017/5/5', location: '314호', status: 'complete', deliveryDate: '2017/5/5'}
-      ]
-    }
-  })
+    var app = new Vue({
+      el: '#app',
+      data: {
+        lists: [{
+          content: '에어컨이 작동을 안 합니다',
+          date: '2017/5/5',
+          location: '314호',
+          status: 'new',
+          deliveryDate: '2017/5/5'
+        }, {
+          content: '문이 열리지 않아요',
+          date: '2017/5/3',
+          location: '301호',
+          status: 'delivered',
+          deliveryDate: '2017/5/5'
+        }, {
+          content: '에어컨이 작동을 안 합니다',
+          date: '2017/5/5',
+          location: '314호',
+          status: 'complete',
+          deliveryDate: '2017/5/5'
+        }, {
+          content: '에어컨이 작동을 안 합니다',
+          date: '2017/5/5',
+          location: '314호',
+          status: 'delivered',
+          deliveryDate: '2017/5/5'
+        }, {
+          content: '에어컨이 작동을 안 합니다',
+          date: '2017/5/5',
+          location: '314호',
+          status: 'complete',
+          deliveryDate: '2017/5/5'
+        }]
+      }
+    })
   </script>
 </body>
+
 </html>
