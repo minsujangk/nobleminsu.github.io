@@ -1,14 +1,3 @@
-.navbar nav li a{
-  line-height:150px;
-  height:150px;
-  padding-top:0;
-}
-
-.container_fluid {
-  width: 76%;
-  margin: 3% 12% 5% 12%;
-}
-
 .title {
   font-size: 22px;
   letter-spacing: 1px;
@@ -17,24 +6,6 @@
   background-color: #34515e;
   color: #FFFFFF;
   border-radius: 2px;
-
-
-}
-#newRequestTable{
-  width: 50%;
-  padding: 20px;
-  border-right:  solid 1px;
-  border-color:  #607d8b;
-}
-#approvedRequestTable{
-  width: 50%;
-  padding: 20px;
-  border-left:  solid 1px;
-  border-color:  #607d8b;
-}
-
-.container{
-
 }
 
 .reqitem {
@@ -43,7 +14,6 @@
   background-color:#d8d8d8;
   font-size:20px;
 }
-
 
 span.step {
   background: red;
