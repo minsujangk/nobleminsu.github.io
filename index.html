@@ -36,7 +36,7 @@
     </nav>
 
     <div class="container-fluid">
-      <div :is="mode" :all-list="allList" :dorm="dorm" @make-request='fetch'></div>
+      <div :is="mode" :all-list="allList" :dorm="dorm" @fetch='fetch'></div>
     </div>
   </div>
 
@@ -76,16 +76,16 @@
               <td>{{req.val.date}}</td>
               <td>{{req.val.location}}</td>
               <td>{{req.val.content}}</td>
-              <td><button class="btn btn-primary">승인</button></td>
               <td>
                 <div class="btn-group">
-                  <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 더 보기 <span class="caret"></span></button>
+                  <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 더 보기 <span class="caret"></span></button>
                   <ul class="dropdown-menu">
                     <li><a>수정</a></li>
                     <li><a>삭제</a></li>
                   </ul>
                 </div>
               </td>
+              <td><button @click='approve(req.key)' class="btn btn-success">승인</button></td>
             </tr>
           </tbody>
         </table>
@@ -184,32 +184,20 @@
       el: '#app',
       data: {
         dorm: '아름관',
-        allList: [
-          {
-            key: '',
-            val: {
-              dorm: '아름관',
-              content: '더워',
-              location: '304호',
-              date: '2016-05-18',
-              status: 'new'
-            }
-          }
-        ],
+        allList: [],
         mode: 'current'
       },
       methods: {
         fetch () {
-          this.allList = []
-          var allList = this.allList
+          var newList = []
           firebase.database().ref("request/").once('value', function (snapshot) {
             var requests = snapshot.val()
             for (key in requests) {
-              allList.push({key: key, val: requests[key]})
+              newList.push({key: key, val: requests[key]})
             }
           })
-          console.log(allList)
-        }
+          this.allList = newList
+        },
       },
       created: function () {
         this.fetch()
@@ -247,8 +235,12 @@
                 status: 'approved'
               }
               console.log(newReqRef.set(newReq))
-              this.$emit('make-request')
+              this.$emit('fetch')
               $('#myModal').modal('hide')
+            },
+            approve (key) {
+              firebase.database().ref('request/'+key+'/status').set('approved')
+              this.$emit('fetch')
             }
           }
         },
