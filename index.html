@@ -71,8 +71,8 @@
               <th>다른 작업</th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="req in dormList(dorm, 'new')">
+          <transition-group name="list" tag="tbody">
+            <tr v-for="req in dormList(dorm, 'new')" :key="req.key">
               <td>{{req.val.date}}</td>
               <td>{{req.val.location}}</td>
               <td>{{req.val.content}}</td>
@@ -87,7 +87,7 @@
               </td>
               <td><button @click='approve(req.key)' class="btn btn-success">승인</button></td>
             </tr>
-          </tbody>
+          </transition-group>
         </table>
       </div>
       <div id="approvedRequestTable" class="col-md-5">
@@ -102,15 +102,15 @@
               <th>완료</th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="req in dormList(dorm, 'approved')">
+          <transition-group name="list" tag="tbody">
+            <tr v-for="req in dormList(dorm, 'approved')" :key="req.key">
               <td>{{req.val.date}}</td>
               <td>{{req.val.location}}</td>
               <td>{{req.val.content}}</td>
               <td>{{req.val.deliveryDate}}</td>
               <td><button class="btn btn-success">수리 완료</button></td>
             </tr>
-          </tbody>
+          </transition-group>
         </table>
         <div style="text-align:center">
           <a class="btn btn-default btn-lg" role="button" data-toggle="modal" data-target="#myModal">새로운 요청 추가하기</a>
