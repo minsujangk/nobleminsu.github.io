@@ -24,7 +24,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a>로그인</a></li>
         </ul>
-        <div class="col-md-3" style="margin: 0 auto; float: none; margin-top: 7px">
+        <div class="col-md-3" style="margin: 7px auto; float: none">
           <select class="form-control" v-model='dorm'>
             <option>성실관</option>
             <option>아름관</option>
@@ -36,7 +36,7 @@
     </nav>
 
     <div class="container-fluid">
-      <div :is="mode" :all-list="allList" :dorm="dorm"></div>
+      <div :is="mode" :all-list="allList" :dorm="dorm" @make-request='fetch'></div>
     </div>
   </div>
 
@@ -72,25 +72,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2017/5/5</td>
-              <td>314호</td>
-              <td>에어컨이 작동을 안합니다.</td>
-              <td><button class="btn btn-primary">승인</button></td>
-              <td>
-                <div class="btn-group">
-                  <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">더 보기<span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a>수정</a></li>
-                    <li><a>삭제</a></li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-            <tr v-for="list in dormList(dorm) ">
-              <td>{{list.date}}</td>
-              <td>{{list.location}}</td>
-              <td>{{list.content}}</td>
+            <tr v-for="req in dormList(dorm, 'new')">
+              <td>{{req.val.date}}</td>
+              <td>{{req.val.location}}</td>
+              <td>{{req.val.content}}</td>
               <td><button class="btn btn-primary">승인</button></td>
               <td>
                 <div class="btn-group">
@@ -118,11 +103,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="list in dormList(dorm)">
-              <td>{{list.date}}</td>
-              <td>{{list.location}}</td>
-              <td>{{list.content}}</td>
-              <td>{{list.deliveryDate}}</td>
+            <tr v-for="req in dormList(dorm, 'approved')">
+              <td>{{req.val.date}}</td>
+              <td>{{req.val.location}}</td>
+              <td>{{req.val.content}}</td>
+              <td>{{req.val.deliveryDate}}</td>
               <td><button class="btn btn-success">수리 완료</button></td>
             </tr>
           </tbody>
@@ -148,20 +133,20 @@
                   <div class="form-group">
                     <label for="location" class="col-sm-2 control-label">위치</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="location" placeholder="위치">
+                      <input v-model="location" type="text" class="form-control" id="location" placeholder="위치">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="content" class="col-sm-2 control-label">요청</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
+                      <textarea v-model="content" class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
                     </div>
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary">요청하기</button>
+                <button @click="makeRequest" type="button" class="btn btn-primary">요청하기</button>
               </div>
             </div>
           </div>
@@ -199,19 +184,71 @@
       el: '#app',
       data: {
         dorm: '아름관',
-        allList: [],
+        allList: [
+          {
+            key: '',
+            val: {
+              dorm: '아름관',
+              content: '더워',
+              location: '304호',
+              date: '2016-05-18',
+              status: 'new'
+            }
+          }
+        ],
         mode: 'current'
+      },
+      methods: {
+        fetch () {
+          this.allList = []
+          var allList = this.allList
+          firebase.database().ref("request/").once('value', function (snapshot) {
+            var requests = snapshot.val()
+            for (key in requests) {
+              allList.push({key: key, val: requests[key]})
+            }
+          })
+          console.log(allList)
+        }
+      },
+      created: function () {
+        this.fetch()
       },
       components: {
         current: {
           template: '#current',
+          data: function () {
+            return {
+              content: '',
+              location: ''
+            }
+          },
           props: ['allList', 'dorm'],
           methods: {
-            dormList: function (dormName) {
-              return this.allList.filter(x => x.dorm === dormName)
+            dormList: function (dormName, statusName) {
+              return this.allList.filter(
+                x => {
+                  return x.val.dorm === dormName && x.val.status === statusName
+                }
+              )
             },
             nowFormat: function () {
               return moment().format('YYYY년 mm월 D일')
+            },
+            makeRequest: function () {
+              var reqRef = firebase.database().ref("/").child("request")
+              var newReqRef = reqRef.push()
+              var newReq = {
+                dorm: this.dorm,
+                content: this.content,
+                location: this.location,
+                date: moment().format('YYYYMMDD'),
+                deliveryDate: moment().format('YYYYMMDD'),
+                status: 'approved'
+              }
+              console.log(newReqRef.set(newReq))
+              this.$emit('make-request')
+              $('#myModal').modal('hide')
             }
           }
         },
@@ -219,26 +256,6 @@
           template: "#history",
           props: ['allList', 'dorm']
         }
-      },
-      created: function () {
-        var date = new Date()
-        var time = date.getTime()
-        var allList = this.allList
-        firebase.database().ref("request/").on('value', function (snapshot) {
-          snapshot.forEach(function(childSnapshot){
-            allList.push(childSnapshot.val())
-          })
-        })
-        /*
-        firebase.database().ref("request/" + time).set({
-          dorm: "hi",
-          status: 0,
-          date: 20170518,
-          location: "318호",
-          content: "몰라",
-          deliveryDate: 20170520
-        })
-        */
       }
     })
   </script>
