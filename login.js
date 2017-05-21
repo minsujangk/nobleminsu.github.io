@@ -28,6 +28,7 @@ $(function() {
         } else {
           msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
         }
+        $('#login').text($lg_username);
         return false;
         break;
       case "lost-form":
