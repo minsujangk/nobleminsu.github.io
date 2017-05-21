@@ -71,6 +71,8 @@ var app = new Vue({
             firebase.database().ref('request/' + key +'/deliveryDate').set(moment().format('YYYY/MM/DD'));
             firebase.database().ref('request/' + key +'/location').set(this.location);
             firebase.database().ref('request/' + key +'/content').set(this.content);
+            $('#edit').modal('hide')
+
         }
       }
     },
