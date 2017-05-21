@@ -78,7 +78,7 @@
               <td>{{req.val.date}}</td>
               <td>{{req.val.location}}</td>
               <td>{{req.val.content}}</td>
-              <td><button type="button"  @click='deleteRequest(req.key)' class="btn btn-default btn-xs">삭제</button></td>
+              <td><button type="button" @click='deleteRequest(req.key)' class="btn btn-default btn-xs">삭제</button></td>
               <td><button @click='approve(req.key)' class="btn btn-success">승인</button></td>
             </tr>
           </transition-group>
@@ -146,7 +146,8 @@
               </div>
             </div>
           </div>
-        </div><!-- /.modal -->
+        </div>
+        <!-- /.modal -->
       </div>
     </div>
   </script>
@@ -163,14 +164,20 @@
               <th>현재 상태</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>2017/5/1</td>
-              <td>105호</td>
-              <td>불이 안켜져요</td>
-              <td>수리 완료</td>
+          <transition-group name="list" tag="tbody">
+            <tr v-for="req in allList" :key="req.key">
+              <td>{{req.val.date}}</td>
+              <td>{{req.val.location}}</td>
+              <td>{{req.val.content}}</td>
+              <td>
+                <span v-if="req.val.status == 'approved'">승인 - {{req.val.deliveryDate}}</span>
+                <span v-else-if="req.val.status == 'deleted'">삭제됨</span>
+                <span v-else-if="req.val.status == 'new'">신규</span>
+              </td>
+              <td><button type="button" class="btn btn-default btn-xs" style="width=10px">수정</button></td>
+              <td><button class="btn btn-success">완료</button></td>
             </tr>
-          </tbody>
+          </transition-group>
         </table>
       </div>
     </div>
