@@ -32,4 +32,19 @@ span.step {
 body {
   font-family: 'Nanum Barun Gothic', sans-serif;
 }
-z
+
+table.table tbody tr td {
+  width: 1px;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}

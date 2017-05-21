@@ -24,7 +24,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a>로그인</a></li>
         </ul>
-        <div class="col-md-3" style="margin: 0 auto; float: none; margin-top: 7px">
+        <div class="col-md-3" style="margin: 7px auto; float: none">
           <select class="form-control" v-model='dorm'>
             <option>성실관</option>
             <option>아름관</option>
@@ -36,7 +36,7 @@
     </nav>
 
     <div class="container-fluid">
-      <div :is="mode" :all-list="allList" :dorm="dorm"></div>
+      <div :is="mode" :all-list="allList" :dorm="dorm" @fetch='fetch'></div>
     </div>
   </div>
 
@@ -64,22 +64,23 @@
         <table id="newRequestTable" class='table'>
           <thead>
             <tr>
-              <th>요청 날짜</th>
+              <th width="15%">요청 날짜</th>
               <th>위치</th>
               <th>요청</th>
-              <th>삭제</th>
-              <th>요청 승인</th>
+              <th width="10%">삭제</th>
+              <th width="10%">승인</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>2017/5/5</td>
-              <td>314호</td>
-              <td>에어컨이 작동을 안합니다.</td>
-              <td><button type="button" class="btn btn-default">삭제</button></td>
-              <td><button class="btn btn-success">승인</button></td>
+
+          <transition-group name="list" tag="tbody">
+            <tr v-for="req in dormList(dorm, 'new')" :key="req.key">
+              <td>{{req.val.date}}</td>
+              <td>{{req.val.location}}</td>
+              <td>{{req.val.content}}</td>
+              <td><button type="button" class="btn btn-default btn-xs">삭제</button></td>
+              <td><button @click='approve(req.key)' class="btn btn-success">승인</button></td>
             </tr>
-          </tbody>
+          </transition-group>
         </table>
       </div>
       <div class="col-md-5">
@@ -87,24 +88,24 @@
         <table id="approvedRequestTable" class='table'>
           <thead>
             <tr>
-              <th>요청 날짜</th>
-              <th>위치</th>
+              <th width="15%">요청 날짜</th>
+              <th width="10%">위치</th>
               <th>요청</th>
-              <th>승인 날짜</th>
-              <th>수정</th>
-              <th>수리 완료</th>
+              <th width="15%">승인 날짜</th>
+              <th width="8%">수정</th>
+              <th width="14%">수리 완료</th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="list in dormList(dorm)">
-              <td>{{list.date}}</td>
-              <td>{{list.location}}</td>
-              <td>{{list.content}}</td>
-              <td>{{list.deliveryDate}}</td>
-              <td><button type="button" class="btn btn-default">수정</button></td>
+          <transition-group name="list" tag="tbody">
+            <tr v-for="req in dormList(dorm, 'approved')" :key="req.key">
+              <td>{{req.val.date}}</td>
+              <td>{{req.val.location}}</td>
+              <td>{{req.val.content}}</td>
+              <td>{{req.val.deliveryDate}}</td>
+              <td><button type="button" class="btn btn-default btn-xs" style="width=10px">수정</button></td>
               <td><button class="btn btn-success">완료</button></td>
             </tr>
-          </tbody>
+          </transition-group>
         </table>
         <div style="text-align:center">
           <a class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#myModal">새로운 요청 추가하기</a>
@@ -127,20 +128,20 @@
                   <div class="form-group">
                     <label for="location" class="col-sm-2 control-label">위치</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="location" placeholder="위치">
+                      <input v-model="location" type="text" class="form-control" id="location" placeholder="위치">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="content" class="col-sm-2 control-label">요청</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
+                      <textarea v-model="content" class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
                     </div>
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary">요청하기</button>
+                <button @click="makeRequest" type="button" class="btn btn-primary">요청하기</button>
               </div>
             </div>
           </div>
@@ -173,54 +174,8 @@
       </div>
     </div>
   </script>
-  <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        dorm: '아름관',
-        allList: [],
-        mode: 'current'
-      },
-      components: {
-        current: {
-          template: '#current',
-          props: ['allList', 'dorm'],
-          methods: {
-            dormList: function (dormName) {
-              return this.allList.filter(x => x.dorm === dormName)
-            },
-            nowFormat: function () {
-              return moment().format('YYYY년 mm월 D일')
-            }
-          }
-        },
-        history: {
-          template: "#history",
-          props: ['allList', 'dorm']
-        }
-      },
-      created: function () {
-        var date = new Date()
-        var time = date.getTime()
-        var allList = this.allList
-        firebase.database().ref("request/").on('value', function (snapshot) {
-          snapshot.forEach(function(childSnapshot){
-            allList.push(childSnapshot.val())
-          })
-        })
-        /*
-        firebase.database().ref("request/" + time).set({
-          dorm: "hi",
-          status: 0,
-          date: 20170518,
-          location: "318호",
-          content: "몰라",
-          deliveryDate: 20170520
-        })
-        */
-      }
-    })
-  </script>
+  <script src="manage_request.js"></script>
+
 
 </body>
 
