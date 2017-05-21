@@ -67,12 +67,21 @@ var app = new Vue({
           }
           console.log(newReqRef.set(newReq))
           this.$emit('fetch')
+	  content = ''
+	  location = ''
           $('#makeNewRequest').modal('hide')
         },
         approve(key) {
           firebase.database().ref('request/' + key + '/status').set('approved')
           this.$emit('fetch')
         },
+	approveAll() {
+	  var currentDormList = this.dormList(this.dorm, 'new')
+	  for (var i in currentDormList) {
+	    firebase.database().ref('request/' + currentDormList[i].key + '/status').set('approved')
+	  }
+	  this.$emit('fetch')
+	},
         completeRequest(key) {
         	firebase.database().ref('request/' + key + '/status').set('completed')
             this.$emit('fetch')

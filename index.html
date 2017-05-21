@@ -59,7 +59,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/moment"></script>
   <script src="https://unpkg.com/vue"></script>
-  <script id="current" type="text/x-template"> <!-- 이거꼭지워야함 -->
+  <script id="current" type="text/x-template">
 
     <div class="row">
       <div class="col-md-6">
@@ -84,7 +84,10 @@
               <td><button @click='approve(req.key)' class="btn btn-success btn-flat">승인</button></td>
             </tr>
           </transition-group>
-        </table>
+	</table>
+	<div style="text-align:center">
+	  <a class="btn btn-primary btn-lg" role="button" @click="approveAll(dorm)">모두 승인하기</a>
+	</div>
       </div>
       <div class="col-md-6">
         <div class="title">전달된 요청</div>
