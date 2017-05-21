@@ -28,7 +28,8 @@ $(function() {
         } else {
           msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
         }
-        $('#login').text($lg_username);
+        $('#login').text($lg_username + '님');
+        $('#login-modal').modal('hide')
         return false;
         break;
       case "lost-form":
@@ -38,6 +39,7 @@ $(function() {
         } else {
           msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send OK");
         }
+        $('#login-modal').modal('hide')
         return false;
         break;
       case "register-form":
@@ -49,6 +51,7 @@ $(function() {
         } else {
           msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
         }
+        $('#login-modal').modal('hide')
         return false;
         break;
       default:
