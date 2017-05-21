@@ -58,17 +58,18 @@
   <script src="https://unpkg.com/moment"></script>
   <script src="https://unpkg.com/vue"></script>
   <script id="current" type="text/x-template">
+
     <div class="row">
       <div class="col-md-offset-1 col-md-5">
         <div class="title">새로운 요청</div>
         <table id="newRequestTable" class='table'>
           <thead>
             <tr>
-              <th width="15%">요청 날짜</th>
-              <th>위치</th>
+              <th width="13%">요청 날짜</th>
+              <th width="12%">위치</th>
               <th>요청</th>
               <th width="10%">삭제</th>
-              <th width="10%">승인</th>
+              <th width="13%">요청 승인</th>
             </tr>
           </thead>
 
@@ -88,12 +89,12 @@
         <table id="approvedRequestTable" class='table'>
           <thead>
             <tr>
-              <th width="15%">요청 날짜</th>
-              <th width="10%">위치</th>
+              <th width="13%">요청 날짜</th>
+              <th width="12%">위치</th>
               <th>요청</th>
-              <th width="15%">승인 날짜</th>
+              <th width="13%">승인 날짜</th>
               <th width="8%">수정</th>
-              <th width="14%">수리 완료</th>
+              <th width="13%">수리 완료</th>
             </tr>
           </thead>
           <transition-group name="list" tag="tbody">
