@@ -29,11 +29,7 @@ nav.navbar.navbar-theme .navbar-nav li.active {
 .has-hover-bottom-bar:hover {
   box-sizing: border-box;
   border-bottom: 2px solid #333;
-<<<<<<< HEAD
   transition: all 0.3s ease;
-=======
-  transition: all 0.1s;
->>>>>>> f1cc0e6cb7696e5bc6623133b4da751d0e3c3af4
 }
 
 .title {
