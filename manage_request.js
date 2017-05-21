@@ -40,7 +40,7 @@
               )
             },
             nowFormat: function () {
-              return moment().format('YYYY년 mm월 D일')
+              return moment().format('YYYY년 MM월 DD일')
             },
             makeRequest: function () {
               var reqRef = firebase.database().ref("/").child("request")
@@ -49,8 +49,8 @@
                 dorm: this.dorm,
                 content: this.content,
                 location: this.location,
-                date: moment().format('YYYYMMDD'),
-                deliveryDate: moment().format('YYYYMMDD'),
+                date: moment().format('YYYY/MM/DD'),
+                deliveryDate: moment().format('YYYY/MM/DD'),
                 status: 'approved'
               }
               console.log(newReqRef.set(newReq))

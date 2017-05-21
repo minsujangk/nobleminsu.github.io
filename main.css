@@ -34,8 +34,6 @@ body {
 }
 
 table.table tbody tr td {
-  width: 1px;
-  white-space: nowrap;
   vertical-align: middle;
   text-align: left;
 }
