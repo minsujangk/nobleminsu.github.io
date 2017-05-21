@@ -76,6 +76,10 @@ var app = new Vue({
           firebase.database().ref('request/' + key + '/status').set('deleted')
           this.$emit('fetch')
         },
+        completeRequest(key) {
+        	firebase.database().ref('request/' + key + '/status').set('completed')
+            this.$emit('fetch')
+        },
         edit(key) {
           firebase.database().ref('request/' + key +'/deliveryDate').set(moment().format('YYYY/MM/DD'));
           firebase.database().ref('request/' + key +'/location').set(this.location);
