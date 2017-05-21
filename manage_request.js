@@ -2,6 +2,12 @@ var app = new Vue({
   el: '#app',
   data: {
     dorm: '아름관',
+    dorms: [
+      '아름관',
+      '성실관',
+      '진리관',
+      '희망관'
+    ],
     allList: [],
     mode: 'current'
   },
@@ -71,7 +77,16 @@ var app = new Vue({
     },
     history: {
       template: "#history",
-      props: ['allList', 'dorm']
+      props: ['allList', 'dorm'],
+      methods: {
+        dormList: function(dormName) {
+          return this.allList.filter(
+            x => {
+              return x.val.dorm === dormName
+            }
+          )
+        },
+      }
     }
   }
 })
