@@ -71,7 +71,17 @@ var app = new Vue({
     },
     history: {
       template: "#history",
-      props: ['allList', 'dorm']
+      props: ['allList', 'dorm'],
+      methods: {
+        recoverRequest(key) {
+          firebase.database().ref('request/' + key + '/status').set('new')
+          this.$emit('fetch')
+        },
+        deleteRequest(key) {
+          firebase.database().ref('request/' + key + '/status').set('deleted')
+          this.$emit('fetch')
+        }
+      }
     }
   }
 })
