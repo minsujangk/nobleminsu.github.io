@@ -107,7 +107,7 @@
               <td>{{req.val.deliveryDate}}</td>
               <td><button type="button" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#edit">수정</button></td>
 
-              <td><button class="btn btn-success">완료</button></td>
+              <td><button @click=completeRequest(req.key) type="button" class="btn btn-success">완료</button></td>
             </tr>
           </transition-group>
         </table>
@@ -211,6 +211,7 @@
                 <span v-if="req.val.status == 'approved'">승인됨 - {{req.val.deliveryDate}}</span>
                 <span v-else-if="req.val.status == 'deleted'">삭제됨</span>
                 <span v-else-if="req.val.status == 'new'">신규</span>
+                <span v-else-if="req.val.status == 'completed'">수리완료</span>
               </td>
               <td>
                 <button v-if="req.val.status == 'approved'" type="button" class="btn btn-default btn-xs">수정</button>
