@@ -29,13 +29,17 @@ nav.navbar.navbar-theme .navbar-nav li.active {
 .has-hover-bottom-bar:hover {
   box-sizing: border-box;
   border-bottom: 2px solid #333;
+<<<<<<< HEAD
   transition: all 0.3s ease;
+=======
+  transition: all 0.1s;
+>>>>>>> f1cc0e6cb7696e5bc6623133b4da751d0e3c3af4
 }
 
 .title {
   font-size: 22px;
   letter-spacing: 1px;
-  margin: 3px;
+  margin: 3px 0;
   padding-left: 10px;
   background-color: #34515e;
   color: #FFFFFF;
@@ -73,12 +77,12 @@ table.table tbody tr td {
 }
 
 .list-enter-active {
-  transition: all 0.4s;
+  transition: all 0.3s;
 }
 
 .list-enter {
-  opacity: 0;
-  transform: translateY(5px);
+  opacity: 0.4;
+  transform: translateY(3px);
 }
 
 #dormName {
