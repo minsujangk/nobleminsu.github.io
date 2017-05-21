@@ -47,7 +47,6 @@ table.table tbody tr td {
   transition: all 0.4s;
 }
 
-
 .list-enter {
   opacity: 0;
   transform: translateY(5px);

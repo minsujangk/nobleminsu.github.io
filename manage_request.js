@@ -48,7 +48,7 @@ var app = new Vue({
           )
         },
         nowFormat: function() {
-          return moment().format('YYYY년 mm월 D일')
+          return moment().format('YYYY년 MM월 D일')
         },
         makeRequest: function() {
           var reqRef = firebase.database().ref("/").child("request")
@@ -57,13 +57,13 @@ var app = new Vue({
             dorm: this.dorm,
             content: this.content,
             location: this.location,
-            date: moment().format('YYYYMMDD'),
-            deliveryDate: moment().format('YYYYMMDD'),
+            date: moment().format('YYYY/MM/DD'),
+            deliveryDate: moment().format('YYYY/MM/DD'),
             status: 'approved'
           }
           console.log(newReqRef.set(newReq))
           this.$emit('fetch')
-          $('#myModal').modal('hide')
+          $('#makeNewRequest').modal('hide')
         },
         approve(key) {
           firebase.database().ref('request/' + key + '/status').set('approved')
@@ -72,6 +72,13 @@ var app = new Vue({
         deleteRequest(key) {
           firebase.database().ref('request/' + key + '/status').set('deleted')
           this.$emit('fetch')
+        },
+        edit(key) {
+            firebase.database().ref('request/' + key +'/deliveryDate').set(moment().format('YYYY/MM/DD'));
+            firebase.database().ref('request/' + key +'/location').set(this.location);
+            firebase.database().ref('request/' + key +'/content').set(this.content);
+            $('#edit').modal('hide')
+
         }
       }
     },
@@ -86,6 +93,14 @@ var app = new Vue({
             }
           )
         },
+        recoverRequest(key) {
+          firebase.database().ref('request/' + key + '/status').set('new')
+          this.$emit('fetch')
+        },
+        deleteRequest(key) {
+          firebase.database().ref('request/' + key + '/status').set('deleted')
+          this.$emit('fetch')
+        }
       }
     }
   }
