@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="stylesheet" type="text/css" href="login.css">
+  <div id="includedContent"></div>
   <meta charset="utf-8">
 </head>
 
@@ -22,7 +24,8 @@
           <li :class="{active: mode==='history'}"><a @click="mode='history'">모든 수리 요청 기록</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a>로그인</a></li>
+          <li><a href="#" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></li>
+          <div id="includedContent"></div>
         </ul>
         <div class="col-md-3" style="margin: 7px auto; float: none">
           <select class="form-control" v-model='dorm'>
@@ -54,6 +57,11 @@
     firebase.initializeApp(config);
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $("#includedContent").load("login.html");
+    });
+  </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/moment"></script>
   <script src="https://unpkg.com/vue"></script>
@@ -176,8 +184,8 @@
                 <span v-else-if="req.val.status == 'new'">신규</span>
               </td>
               <td>
-                <button  v-if="req.val.status == 'approved'" type="button" class="btn btn-default btn-xs">수정</button>
-                  <button  v-if="req.val.status == 'deleted'" type="button" @click='recoverRequest(req.key)' class="btn btn-default btn-xs">복원</button>
+                <button v-if="req.val.status == 'approved'" type="button" class="btn btn-default btn-xs">수정</button>
+                <button v-if="req.val.status == 'deleted'" type="button" @click='recoverRequest(req.key)' class="btn btn-default btn-xs">복원</button>
                 <button v-else-if="req.val.status == 'new'" type="button" @click='deleteRequest(req.key)' class="btn btn-default btn-xs">삭제</button>
               </td>
               <td>
@@ -191,6 +199,7 @@
     </div>
   </script>
   <script src="manage_request.js"></script>
+  <script src="login.js"></script>
 </body>
 
 </html>
