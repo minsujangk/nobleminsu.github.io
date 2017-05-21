@@ -25,6 +25,9 @@ var app = new Vue({
       })
       this.allList = newList
     },
+    numberOfNew: function(dormName) {
+      return this.allList.filter(x => x.val.dorm === dormName && x.val.status === 'new').length
+    }
   },
   created: function() {
     this.fetch()
@@ -74,11 +77,10 @@ var app = new Vue({
           this.$emit('fetch')
         },
         edit(key) {
-            firebase.database().ref('request/' + key +'/deliveryDate').set(moment().format('YYYY/MM/DD'));
-            firebase.database().ref('request/' + key +'/location').set(this.location);
-            firebase.database().ref('request/' + key +'/content').set(this.content);
-            $('#edit').modal('hide')
-
+          firebase.database().ref('request/' + key +'/deliveryDate').set(moment().format('YYYY/MM/DD'));
+          firebase.database().ref('request/' + key +'/location').set(this.location);
+          firebase.database().ref('request/' + key +'/content').set(this.content);
+          $('#edit').modal('hide')
         }
       }
     },

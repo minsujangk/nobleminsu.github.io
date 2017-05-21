@@ -17,12 +17,12 @@
       <div class="container-theme">
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dormName">{{ dorm }}<span class="caret"></span></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dormName">{{ dorm }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li v-for="aDorm in dorms"><a @click="dorm=aDorm">{{ aDorm }}</a></li>
             </ul>
           </li>
-          <li class="has-hover-bottom-bar" :class="{active: mode==='current'}"><a @click="mode='current'">현재 수리 요청 목록 <span class="badge btn-danger">1</span> </a></li>
+          <li class="has-hover-bottom-bar" :class="{active: mode==='current'}"><a @click="mode='current'">현재 수리 요청 목록 <span class="notification">{{numberOfNew(dorm)}}</span> </a></li>
           <li class="has-hover-bottom-bar" :class="{active: mode==='history'}"><a @click="mode='history'">모든 수리 요청 기록</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -81,7 +81,7 @@
               <td>{{req.val.location}}</td>
               <td>{{req.val.content}}</td>
               <td><button type="button" @click='deleteRequest(req.key)' class="btn btn-default btn-xs">삭제</button></td>
-              <td><button @click='approve(req.key)' class="btn btn-success">승인</button></td>
+              <td><button @click='approve(req.key)' class="btn btn-success btn-flat">승인</button></td>
             </tr>
           </transition-group>
         </table>

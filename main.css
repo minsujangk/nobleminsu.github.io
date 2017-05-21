@@ -1,3 +1,7 @@
+* {
+  text-shadow: none !important;
+}
+
 .container-theme {
   max-width: 85em;
   margin: 0 auto;
@@ -7,7 +11,6 @@ nav.navbar.navbar-theme {
   border-top: 0;
   border-radius: 0;
   border: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   background: whitesmoke;
 }
 
@@ -39,7 +42,17 @@ nav.navbar.navbar-theme .navbar-nav li.active {
   padding-left: 10px;
   background-color: #34515e;
   color: #FFFFFF;
-  border-radius: 2px;
+}
+
+.notification {
+  position: absolute;
+  top: 5px;
+  right: -4px;
+  padding: 0 6px;
+  border-radius: 100px;
+  background-color: #C62828;
+  color: white;
+  z-index: 2;
 }
 
 .reqitem {
@@ -47,20 +60,6 @@ nav.navbar.navbar-theme .navbar-nav li.active {
   padding:5px;
   background-color:#d8d8d8;
   font-size:20px;
-}
-
-span.step {
-  background: red;
-  border-radius: 0.8em;
-  -moz-border-radius: 0.8em;
-  -webkit-border-radius: 0.8em;
-  color: #ffffff;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 1.6em;
-  margin-right: 5px;
-  text-align: center;
-  width: 1.6em;
 }
 
 body {
@@ -84,8 +83,10 @@ table.table tbody tr td {
 #dormName {
   font-size: 20px;
   letter-spacing: 2px;
-  padding-left: 10px;
+  padding-left: 20px;
+  margin-right: 30px;
   background-color: #34515e;
   color: #FFFFFF;
-  border-radius: 2px;
+  border-bottom: 2px solid #34515e;
+  text-shadow: none;
 }
