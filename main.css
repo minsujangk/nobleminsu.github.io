@@ -1,6 +1,35 @@
-.container-good {
+.container-theme {
   max-width: 80em;
   margin: 0 auto;
+}
+
+nav.navbar.navbar-theme {
+  border-top: 0;
+  border-radius: 0;
+  border: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  background: whitesmoke;
+}
+
+nav.navbar.navbar-theme .navbar-nav a {
+  color: #555;
+}
+
+nav.navbar.navbar-theme .navbar-nav a:hover,
+nav.navbar.navbar-theme .navbar-nav a:focus,
+nav.navbar.navbar-theme .navbar-nav a:active {
+  background-color: whitesmoke;
+}
+
+nav.navbar.navbar-theme .navbar-nav li.active {
+  box-sizing: border-box;
+  border-bottom: 2px solid #34515e;
+}
+
+.has-hover-bottom-bar:hover {
+  box-sizing: border-box;
+  border-bottom: 2px solid #333;
+  transition: all 0.3s ease;
 }
 
 .title {

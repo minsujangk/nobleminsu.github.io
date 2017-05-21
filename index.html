@@ -12,17 +12,17 @@
 
 <body>
   <div id="app">
-    <nav class="navbar navbar-default">
-      <div class="container-good">
+    <nav class="navbar navbar-theme">
+      <div class="container-theme">
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dorm }}<span class="caret"></span></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dorm }}<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li v-for="aDorm in dorms"><a @click="dorm=aDorm">{{ aDorm }}</a></li>
             </ul>
           </li>
-          <li :class="{active: mode==='current'}"><a @click="mode='current'">현재 수리 요청 목록 <span class="badge btn-danger">1</span> </a></li>
-          <li :class="{active: mode==='history'}"><a @click="mode='history'">모든 수리 요청 기록</a></li>
+          <li class="has-hover-bottom-bar" :class="{active: mode==='current'}"><a @click="mode='current'">현재 수리 요청 목록 <span class="badge btn-danger">1</span> </a></li>
+          <li class="has-hover-bottom-bar" :class="{active: mode==='history'}"><a @click="mode='history'">모든 수리 요청 기록</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a>로그인</a></li>
@@ -30,7 +30,7 @@
       </div>
     </nav>
 
-    <div class="container-good">
+    <div class="container-theme">
       <div :is="mode" :all-list="allList" :dorm="dorm" @fetch='fetch'></div>
     </div>
   </div>
