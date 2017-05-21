@@ -2,6 +2,12 @@ var app = new Vue({
   el: '#app',
   data: {
     dorm: '아름관',
+    dorms: [
+      '아름관',
+      '성실관',
+      '진리관',
+      '희망관'
+    ],
     allList: [],
     mode: 'current'
   },
@@ -51,13 +57,13 @@ var app = new Vue({
             dorm: this.dorm,
             content: this.content,
             location: this.location,
-            date: moment().format('YYYYMMDD'),
-            deliveryDate: moment().format('YYYYMMDD'),
+            date: moment().format('YYYY/MM/DD'),
+            deliveryDate: moment().format('YYYY/MM/DD'),
             status: 'approved'
           }
           console.log(newReqRef.set(newReq))
           this.$emit('fetch')
-          $('#myModal').modal('hide')
+          $('#makeNewRequest').modal('hide')
         },
         approve(key) {
           firebase.database().ref('request/' + key + '/status').set('approved')
@@ -66,6 +72,13 @@ var app = new Vue({
         deleteRequest(key) {
           firebase.database().ref('request/' + key + '/status').set('deleted')
           this.$emit('fetch')
+        },
+        edit(key) {
+            firebase.database().ref('request/' + key +'/deliveryDate').set(moment().format('YYYY/MM/DD'));
+            firebase.database().ref('request/' + key +'/location').set(this.location);
+            firebase.database().ref('request/' + key +'/content').set(this.content);
+            $('#edit').modal('hide')
+
         }
       }
     },
@@ -73,6 +86,13 @@ var app = new Vue({
       template: "#history",
       props: ['allList', 'dorm'],
       methods: {
+        dormList: function(dormName) {
+          return this.allList.filter(
+            x => {
+              return x.val.dorm === dormName
+            }
+          )
+        },
         recoverRequest(key) {
           firebase.database().ref('request/' + key + '/status').set('new')
           this.$emit('fetch')

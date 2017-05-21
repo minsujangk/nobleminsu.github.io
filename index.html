@@ -15,11 +15,14 @@
 <body>
   <div id="app">
     <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand">{{ dorm }}</a>
-        </div>
+      <div class="container-good">
         <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dorm }}<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li v-for="aDorm in dorms"><a @click="dorm=aDorm">{{ aDorm }}</a></li>
+            </ul>
+          </li>
           <li :class="{active: mode==='current'}"><a @click="mode='current'">현재 수리 요청 목록 <span class="badge btn-danger">1</span> </a></li>
           <li :class="{active: mode==='history'}"><a @click="mode='history'">모든 수리 요청 기록</a></li>
         </ul>
@@ -27,18 +30,10 @@
           <li><a href="#" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></li>
           <div id="includedContent"></div>
         </ul>
-        <div class="col-md-3" style="margin: 7px auto; float: none">
-          <select class="form-control" v-model='dorm'>
-            <option>성실관</option>
-            <option>아름관</option>
-            <option>진리관</option>
-            <option>희망관</option>
-          </select>
-        </div>
       </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container-good">
       <div :is="mode" :all-list="allList" :dorm="dorm" @fetch='fetch'></div>
     </div>
   </div>
@@ -68,7 +63,7 @@
   <script id="current" type="text/x-template">
 
     <div class="row">
-      <div class="col-md-offset-1 col-md-5">
+      <div class="col-md-6">
         <div class="title">새로운 요청</div>
         <table id="newRequestTable" class='table'>
           <thead>
@@ -92,7 +87,7 @@
           </transition-group>
         </table>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-6">
         <div class="title">전달된 요청</div>
         <table id="approvedRequestTable" class='table'>
           <thead>
@@ -111,15 +106,17 @@
               <td>{{req.val.location}}</td>
               <td>{{req.val.content}}</td>
               <td>{{req.val.deliveryDate}}</td>
-              <td><button type="button" class="btn btn-default btn-xs" style="width=10px">수정</button></td>
+              <td><button type="button" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#edit">수정</button></td>
+
               <td><button class="btn btn-success">완료</button></td>
             </tr>
           </transition-group>
         </table>
         <div style="text-align:center">
-          <a class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#myModal">새로운 요청 추가하기</a>
+          <a class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#makeNewRequest">새로운 요청 추가하기</a>
         </div>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+
+        <div class="modal fade" id="makeNewRequest" tabindex="-1" role="dialog">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -154,12 +151,44 @@
               </div>
             </div>
           </div>
-        </div>
-        <!-- /.modal -->
+        </div><!-- /.modal -->
+
+        <div class="modal fade" id="edit" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">요청 수정하기</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="location" class="col-sm-2 control-label">위치</label>
+                    <div class="col-sm-10">
+                      <input v-model="location" type="text" class="form-control" id="location" placeholder="위치">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="content" class="col-sm-2 control-label">요청</label>
+                    <div class="col-sm-10">
+                      <textarea v-model="content" class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                <button @click="edit" type="button" class="btn btn-default">수정하기</button>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.modal -->
+
       </div>
     </div>
   </script>
   <script id="history" type="text/x-template">
+<<<<<<< HEAD
     <div class="row">
       <div class="col-md-offset-1 col-md-10">
         <div class="title">모든 수리 요청 기록</div>
@@ -196,6 +225,42 @@
           </transition-group>
         </table>
       </div>
+=======
+    <div>
+      <div class="title">모든 수리 요청 기록</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="15%">날짜</th>
+            <th width="10%">위치</th>
+            <th width="50%">요청</th>
+            <th width="25%" colspan="3">현재 상태</th>
+          </tr>
+        </thead>
+        <transition-group name="list" tag="tbody">
+          <tr v-for="req in dormList(dorm)" :key="req.key" v-bind:class="{success: req.val.status == 'approved',
+        active: req.val.status == 'deleted', warning: req.val.status == 'new'}">
+            <td>{{req.val.date}}</td>
+            <td>{{req.val.location}}</td>
+            <td>{{req.val.content}}</td>
+            <td>
+              <span v-if="req.val.status == 'approved'">승인됨 - {{req.val.deliveryDate}}</span>
+              <span v-else-if="req.val.status == 'deleted'">삭제됨</span>
+              <span v-else-if="req.val.status == 'new'">신규</span>
+            </td>
+            <td>
+              <button v-if="req.val.status == 'approved'" type="button" class="btn btn-default btn-xs">수정</button>
+              <button v-if="req.val.status == 'deleted'" type="button" @click='recoverRequest(req.key)' class="btn btn-default btn-xs">복원</button>
+              <button v-else-if="req.val.status == 'new'" type="button" @click='deleteRequest(req.key)' class="btn btn-default btn-xs">삭제</button>
+            </td>
+            <td>
+              <button v-if="req.val.status == 'approved'" class="btn btn-primary">완료</button>
+              <button v-else-if="req.val.status == 'new'" @click='approve(req.key)' class="btn btn-success">승인</button>
+            </td>
+          </tr>
+        </transition-group>
+      </table>
+>>>>>>> abb168012049af2008026086b7663230809fa176
     </div>
   </script>
   <script src="manage_request.js"></script>
