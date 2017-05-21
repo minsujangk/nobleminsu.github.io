@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="stylesheet" type="text/css" href="login.css">
   <meta charset="utf-8">
 </head>
 
@@ -25,7 +26,8 @@
           <li class="has-hover-bottom-bar" :class="{active: mode==='history'}"><a @click="mode='history'">모든 수리 요청 기록</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a>로그인</a></li>
+          <li><a href="#" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></li>
+          <div id="includedContent"></div>
         </ul>
       </div>
     </nav>
@@ -49,6 +51,11 @@
     firebase.initializeApp(config);
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $("#includedContent").load("login.html");
+    });
+  </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/moment"></script>
   <script src="https://unpkg.com/vue"></script>
@@ -143,7 +150,8 @@
               </div>
             </div>
           </div>
-        </div><!-- /.modal -->
+        </div>
+        <!-- /.modal -->
 
         <div class="modal fade" id="edit" tabindex="-1" role="dialog">
           <div class="modal-dialog" role="document">
@@ -174,7 +182,8 @@
               </div>
             </div>
           </div>
-        </div><!-- /.modal -->
+        </div>
+        <!-- /.modal -->
 
       </div>
     </div>
@@ -217,6 +226,7 @@
     </div>
   </script>
   <script src="manage_request.js"></script>
+  <script src="login.js"></script>
 </body>
 
 </html>
