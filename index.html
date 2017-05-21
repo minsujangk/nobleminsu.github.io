@@ -77,7 +77,7 @@
               <td>{{req.val.date}}</td>
               <td>{{req.val.location}}</td>
               <td>{{req.val.content}}</td>
-              <td><button type="button" class="btn btn-default btn-xs">삭제</button></td>
+              <td><button type="button"  @click='deleteRequest(req.key)' class="btn btn-default btn-xs">삭제</button></td>
               <td><button @click='approve(req.key)' class="btn btn-success">승인</button></td>
             </tr>
           </transition-group>
