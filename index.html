@@ -139,7 +139,7 @@
                   <div class="form-group">
                     <label for="content" class="col-sm-2 control-label">요청</label>
                     <div class="col-sm-10">
-                      <textarea v-model="content" class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
+                      <textarea v-model="content" class="form-control" name="content" id="content" cols="30" rows="10" @keydown.enter="makeRequest"></textarea>
                     </div>
                   </div>
                 </form>
