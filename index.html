@@ -59,16 +59,16 @@
   <script src="https://unpkg.com/vue"></script>
   <script id="current" type="text/x-template">
     <div class="row">
-      <div id="newRequestTable" class="col-md-offset-1 col-md-5">
+      <div class="col-md-offset-1 col-md-5">
         <div class="title">새로운 요청</div>
-        <table class="table">
+        <table id="newRequestTable" class='table'>
           <thead>
             <tr>
               <th>요청 날짜</th>
               <th>위치</th>
               <th>요청</th>
-              <th>승인</th>
-              <th>다른 작업</th>
+              <th>삭제</th>
+              <th>요청 승인</th>
             </tr>
           </thead>
           <tbody>
@@ -76,45 +76,23 @@
               <td>2017/5/5</td>
               <td>314호</td>
               <td>에어컨이 작동을 안합니다.</td>
-              <td><button class="btn btn-primary">승인</button></td>
-              <td>
-                <div class="btn-group">
-                  <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">더 보기<span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a>수정</a></li>
-                    <li><a>삭제</a></li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-            <tr v-for="list in dormList(dorm) ">
-              <td>{{list.date}}</td>
-              <td>{{list.location}}</td>
-              <td>{{list.content}}</td>
-              <td><button class="btn btn-primary">승인</button></td>
-              <td>
-                <div class="btn-group">
-                  <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 더 보기 <span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a>수정</a></li>
-                    <li><a>삭제</a></li>
-                  </ul>
-                </div>
-              </td>
+              <td><button type="button" class="btn btn-default">삭제</button></td>
+              <td><button class="btn btn-success">승인</button></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div id="approvedRequestTable" class="col-md-5">
+      <div class="col-md-5">
         <div class="title">전달된 요청</div>
-        <table class="table request">
+        <table id="approvedRequestTable" class='table'>
           <thead>
             <tr>
               <th>요청 날짜</th>
               <th>위치</th>
               <th>요청</th>
               <th>승인 날짜</th>
-              <th>완료</th>
+              <th>수정</th>
+              <th>수리 완료</th>
             </tr>
           </thead>
           <tbody>
@@ -123,12 +101,13 @@
               <td>{{list.location}}</td>
               <td>{{list.content}}</td>
               <td>{{list.deliveryDate}}</td>
-              <td><button class="btn btn-success">수리 완료</button></td>
+              <td><button type="button" class="btn btn-default">수정</button></td>
+              <td><button class="btn btn-success">완료</button></td>
             </tr>
           </tbody>
         </table>
         <div style="text-align:center">
-          <a class="btn btn-default btn-lg" role="button" data-toggle="modal" data-target="#myModal">새로운 요청 추가하기</a>
+          <a class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#myModal">새로운 요청 추가하기</a>
         </div>
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
           <div class="modal-dialog" role="document">
