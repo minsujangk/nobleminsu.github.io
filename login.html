@@ -3,7 +3,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" align="center">
-        <img class="img-circle" id="img_logo" src="http://bootsnipp.com/img/logo.jpg">
+        <!-- <img class="img-circle" id="img_logo" src="http://bootsnipp.com/img/logo.jpg"> -->
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 					</button>
@@ -17,21 +17,21 @@
           <div class="modal-body">
             <div id="div-login-msg">
               <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-              <span id="text-login-msg">Type your username and password.</span>
+              <span id="text-login-msg">아이디과 비밀번호를 쓰세요.</span>
             </div>
-            <input id="login_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
-            <input id="login_password" class="form-control" type="password" placeholder="Password" required>
+            <input id="login_username" class="form-control" type="text" placeholder="ID" required>
+            <input id="login_password" class="form-control" type="password" placeholder="비밀번호" required>
             <div class="checkbox">
-              <label><input type="checkbox"> Remember me</label>
+              <label><input type="checkbox"> 아이디와 비밀번호 저장</label>
             </div>
           </div>
           <div class="modal-footer">
             <div>
-              <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
             </div>
             <div>
-              <button id="login_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
-              <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
+              <button id="login_lost_btn" type="button" class="btn btn-link">비밀번호를 잊으셨나요?</button>
+              <button id="login_register_btn" type="button" class="btn btn-link">회원가입</button>
             </div>
           </div>
         </form>
@@ -42,7 +42,7 @@
           <div class="modal-body">
             <div id="div-lost-msg">
               <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
-              <span id="text-lost-msg">Type your e-mail.</span>
+              <span id="text-lost-msg">이메일을 입력하세요.</span>
             </div>
             <input id="lost_email" class="form-control" type="text" placeholder="E-Mail (type ERROR for error effect)" required>
           </div>
