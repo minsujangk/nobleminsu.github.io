@@ -64,7 +64,7 @@ var app = new Vue({
           this.$emit('fetch')
         },
         deleteRequest(key) {
-          firebase.database().ref('request/' + key).remove()
+          firebase.database().ref('request/' + key + '/status').set('deleted')
           this.$emit('fetch')
         }
       }
