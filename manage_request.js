@@ -42,7 +42,7 @@ var app = new Vue({
           )
         },
         nowFormat: function() {
-          return moment().format('YYYY년 mm월 D일')
+          return moment().format('YYYY년 MM월 D일')
         },
         makeRequest: function() {
           var reqRef = firebase.database().ref("/").child("request")
