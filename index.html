@@ -62,11 +62,17 @@
   <script id="current" type="text/x-template">
 
     <div class="row">
-      <div class="col-md-12">
-        <div style="text-align:center; float: right;">
-          <a id="newRqButton" class="btn btn-lg" role="button" data-toggle="modal" data-target="#makeNewRequest">새로운 요청 추가하기</a>
+      <div class="col-md-6">
+        <div style="text-align:center; float: right;" >
+          <a class="btn btn-success btn-md" role="button" @click="approveAll(dorm)">모두 승인</a>
         </div>
       </div>
+      <div class="col-md-6">
+        <div style="text-align:center; float: right">
+          <a class="btn btn-primary btn-md" role="button" data-toggle="modal" data-target="#makeNewRequest">새로운 요청 추가</a>
+        </div>
+      </div>
+
       <div class="col-md-6">
         <div class="title">새로운 요청</div>
         <table id="newRequestTable" class='table'>
@@ -89,10 +95,7 @@
               <td><button @click='approve(req.key)' class="btn btn-success btn-flat">승인</button></td>
             </tr>
           </transition-group>
-	</table>
-	<div style="text-align:center">
-	  <a class="btn btn-primary btn-lg" role="button" @click="approveAll(dorm)">모두 승인하기</a>
-	</div>
+  </table>
       </div>
       <div class="col-md-6">
         <div class="title">전달된 요청</div>
@@ -190,49 +193,49 @@
         </div>
         <!-- /.modal -->
 
-	<!-- delete modal -->
+  <!-- delete modal -->
   <div id="delete_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-      
+
 
       <!-- remove modal content -->
       <div class="modal-content">
-	<div class="modal-header">
-	  <button type="button" class="close" data-dismiss="modal">&times;</button>
-	  <h4 class="modal-title">요청 삭제하기</h4>
-	</div>
-	<!-- remove reason -->
-	<div class="modal-body">
-	  <form class="form-horizontal">
-	    <!-- Information of Current Deletion Request -->
-	    <div class="form-group">
-	      <label class="col-sm-2 control-label">요청 내용 : </label>
-	      <p class="col-sm-10" v-if='deleteRequest != ""'> {{ deleteRequest.val.content }}</p>
-	      <p class="col-sm-10" v-else> 선택되지 않음 </p>
-	    </div>
-	    <!-- Key of Current Deletion Request - HIDDEN -->
-	    <input type="hidden" name="delete_key" id = "delete_key">
-	    <!-- Input Reason for Deletion -->
-	    <div class="form-group">
-	      <label for="delete_reason" class="col-sm-2 control-label">삭제 사유</label>
-	      <div class="col-sm-10">
-		<textarea  class="form-control" name="delete_reason" id="delete_reason"></textarea>
-	      </div>
-	    </div>
-	    <!-- Hidden input for Key -->
-	  </form>
-	</div>
-	<div class="modal-footer">
-	  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-	  <button @click="deleteRequestByModal" type="button" class="btn btn-danger">삭제하기</button>
-	</div>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">요청 삭제하기</h4>
+  </div>
+  <!-- remove reason -->
+  <div class="modal-body">
+    <form class="form-horizontal">
+      <!-- Information of Current Deletion Request -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">요청 내용 : </label>
+        <p class="col-sm-10" v-if='deleteRequest != ""'> {{ deleteRequest.val.content }}</p>
+        <p class="col-sm-10" v-else> 선택되지 않음 </p>
+      </div>
+      <!-- Key of Current Deletion Request - HIDDEN -->
+      <input type="hidden" name="delete_key" id = "delete_key">
+      <!-- Input Reason for Deletion -->
+      <div class="form-group">
+        <label for="delete_reason" class="col-sm-2 control-label">삭제 사유</label>
+        <div class="col-sm-10">
+    <textarea  class="form-control" name="delete_reason" id="delete_reason"></textarea>
+        </div>
+      </div>
+      <!-- Hidden input for Key -->
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+    <button @click="deleteRequestByModal" type="button" class="btn btn-danger">삭제하기</button>
+  </div>
       </div>
     </div>
   </div>
 <!-- remove modal end -->
- 
+
       </div>
-    </div> 
+    </div>
   </script>
 
  <script id="history" type="text/x-template">
