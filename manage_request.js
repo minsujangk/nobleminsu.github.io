@@ -25,6 +25,9 @@ var app = new Vue({
       })
       this.allList = newList
     },
+    numberOfNew: function(dormName) {
+      return this.allList.filter(x => x.val.dorm === dormName && x.val.status === 'new').length
+    }
   },
   created: function() {
     this.fetch()
@@ -35,7 +38,8 @@ var app = new Vue({
       data: function() {
         return {
           content: '',
-          location: ''
+          location: '',
+	  deleteRequest : ''
         }
       },
       props: ['allList', 'dorm'],
@@ -63,27 +67,48 @@ var app = new Vue({
           }
           console.log(newReqRef.set(newReq))
           this.$emit('fetch')
+	  content = ''
+	  location = ''
           $('#makeNewRequest').modal('hide')
         },
         approve(key) {
           firebase.database().ref('request/' + key + '/status').set('approved')
           this.$emit('fetch')
         },
-        deleteRequest(key) {
-          firebase.database().ref('request/' + key + '/status').set('deleted')
-          this.$emit('fetch')
-        },
+	approveAll() {
+	  var currentDormList = this.dormList(this.dorm, 'new')
+	  for (var i in currentDormList) {
+	    firebase.database().ref('request/' + currentDormList[i].key + '/status').set('approved')
+	  }
+	  this.$emit('fetch')
+	},
         completeRequest(key) {
         	firebase.database().ref('request/' + key + '/status').set('completed')
             this.$emit('fetch')
         },
         edit(key) {
-            firebase.database().ref('request/' + key +'/deliveryDate').set(moment().format('YYYY/MM/DD'));
-            firebase.database().ref('request/' + key +'/location').set(this.location);
-            firebase.database().ref('request/' + key +'/content').set(this.content);
-            $('#edit').modal('hide')
-
-        }
+          firebase.database().ref('request/' + key +'/deliveryDate').set(moment().format('YYYY/MM/DD'));
+          firebase.database().ref('request/' + key +'/location').set(this.location);
+          firebase.database().ref('request/' + key +'/content').set(this.content);
+          $('#edit').modal('hide')
+        },
+	selectRequestByKey : function(key) {
+	  return this.allList.filter(
+	    x => {
+	      return x.key === key
+	    }
+	  )
+	},
+	showDeleteModal : function(key) {
+	  this.deleteRequest = this.selectRequestByKey(key)[0]
+	  $('#delete_modal').modal('show')
+        },
+	deleteRequestByModal : function() {
+	  firebase.database().ref('request/' + this.deleteRequest.key + '/status').set('deleted')
+	  this.deleteRequest = ''
+	  $('#delete_modal').modal('hide')
+	  this.$emit('fetch')
+	}
       }
     },
     history: {
