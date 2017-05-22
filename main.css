@@ -95,3 +95,8 @@ table.table tbody tr td {
   background-color: #34515e;
   color: #FFFFFF;
 }
+
+.top-action-button {
+  float: right;
+  margin-bottom: 10px;
+}
