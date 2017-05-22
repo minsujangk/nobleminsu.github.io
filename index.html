@@ -61,7 +61,6 @@
     <script src="https://unpkg.com/vue"></script>
     <script id="current" type="text/x-template">
 
-<<<<<<< HEAD
       <div class="row">
         <div class="col-md-6">
           <div style="text-align:center; float: right;" >
@@ -120,17 +119,7 @@
               </tr>
             </transition-group>
           </table>
-=======
-    <div class="row">
-      <div class="col-md-6">
-        <div class="top-action-button">
-          <a class="btn btn-success btn-md" role="button" @click="approveAll(dorm)">모두 승인</a>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="top-action-button">
-          <a class="btn btn-primary btn-md" role="button" data-toggle="modal" data-target="#makeNewRequest">새로운 요청 추가</a>
->>>>>>> 0a4f02cd8868c1d799d97292e2271438f5bab3d7
+
         </div>
 
         <edit-modal :all-list="allList" :reqKey="currentEditingRequestKey" @fetch="$emit('fetch')"/>
