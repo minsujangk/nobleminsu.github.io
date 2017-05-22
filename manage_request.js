@@ -39,7 +39,8 @@ var app = new Vue({
         return {
           content: '',
           location: '',
-          currentEditingRequestKey: ''
+          currentEditingRequestKey: '',
+	        deleteRequest : ''
         }
       },
       props: ['allList', 'dorm'],
@@ -67,16 +68,21 @@ var app = new Vue({
           }
           console.log(newReqRef.set(newReq))
           this.$emit('fetch')
+          content = ''
+          location = ''
           $('#makeNewRequest').modal('hide')
         },
         approve(key) {
           firebase.database().ref('request/' + key + '/status').set('approved')
           this.$emit('fetch')
         },
-        deleteRequest(key) {
-          firebase.database().ref('request/' + key + '/status').set('deleted')
+      	approveAll() {
+          var currentDormList = this.dormList(this.dorm, 'new')
+          for (var i in currentDormList) {
+            firebase.database().ref('request/' + currentDormList[i].key + '/status').set('approved')
+          }
           this.$emit('fetch')
-        },
+      	},
         completeRequest(key) {
         	firebase.database().ref('request/' + key + '/status').set('completed')
             this.$emit('fetch')
@@ -84,7 +90,24 @@ var app = new Vue({
         openEditModal (key) {
           this.currentEditingRequestKey = key
           $('#edit').modal('show')
-        }
+        },
+        selectRequestByKey : function(key) {
+      	  return this.allList.filter(
+      	    x => {
+      	      return x.key === key
+      	    }
+      	  )
+      	},
+      	showDeleteModal : function(key) {
+      	  this.deleteRequest = this.selectRequestByKey(key)[0]
+      	  $('#delete_modal').modal('show')
+              },
+      	deleteRequestByModal : function() {
+      	  firebase.database().ref('request/' + this.deleteRequest.key + '/status').set('deleted')
+      	  this.deleteRequest = ''
+      	  $('#delete_modal').modal('hide')
+      	  this.$emit('fetch')
+      	}
       },
       components: {
         editModal: {
