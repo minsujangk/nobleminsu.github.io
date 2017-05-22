@@ -62,6 +62,11 @@
   <script id="current" type="text/x-template">
 
     <div class="row">
+      <div class="col-md-12">
+        <div style="text-align:center; float: right;">
+          <a id="newRqButton" class="btn btn-lg" role="button" data-toggle="modal" data-target="#makeNewRequest">새로운 요청 추가하기</a>
+        </div>
+      </div>
       <div class="col-md-6">
         <div class="title">새로운 요청</div>
         <table id="newRequestTable" class='table'>
@@ -111,9 +116,6 @@
             </tr>
           </transition-group>
         </table>
-        <div style="text-align:center">
-          <a class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#makeNewRequest">새로운 요청 추가하기</a>
-        </div>
 
         <div class="modal fade" id="makeNewRequest" tabindex="-1" role="dialog">
           <div class="modal-dialog" role="document">

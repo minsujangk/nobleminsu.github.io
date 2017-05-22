@@ -89,3 +89,8 @@ table.table tbody tr td {
   color: #FFFFFF;
   border-radius: 2px;
 }
+
+#newRqButton {
+  background-color: #34515e;
+  color: #FFFFFF;
+}
