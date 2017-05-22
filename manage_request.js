@@ -38,7 +38,8 @@ var app = new Vue({
       data: function() {
         return {
           content: '',
-          location: ''
+          location: '',
+          currentEditingRequestKey: ''
         }
       },
       props: ['allList', 'dorm'],
@@ -80,11 +81,41 @@ var app = new Vue({
         	firebase.database().ref('request/' + key + '/status').set('completed')
             this.$emit('fetch')
         },
-        edit(key) {
-          firebase.database().ref('request/' + key +'/deliveryDate').set(moment().format('YYYY/MM/DD'));
-          firebase.database().ref('request/' + key +'/location').set(this.location);
-          firebase.database().ref('request/' + key +'/content').set(this.content);
-          $('#edit').modal('hide')
+        openEditModal (key) {
+          this.currentEditingRequestKey = key
+          $('#edit').modal('show')
+        }
+      },
+      components: {
+        editModal: {
+          template: '#edit-modal',
+          data: function () {
+            return {
+              location: '',
+              content: ''
+            }
+          },
+          props: ['allList', 'reqKey'],
+          methods: {
+            edit () {
+              firebase.database().ref('request/' + this.reqKey +'/deliveryDate').set(moment().format('YYYY/MM/DD'));
+              firebase.database().ref('request/' + this.reqKey +'/location').set(this.location);
+              firebase.database().ref('request/' + this.reqKey +'/content').set(this.content);
+              $('#edit').modal('hide')
+              this.$emit('fetch')
+            }
+          },
+          watch: {
+            reqKey: function (newKey) {
+              for (i in this.allList) {
+                if (this.allList[i].key === newKey) {
+                  var currentRequestVal = this.allList[i].val
+                  this.location = currentRequestVal.location
+                  this.content = currentRequestVal.content
+                }
+              }
+            }
+          }
         }
       }
     },
