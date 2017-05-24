@@ -35,4 +35,6 @@ and part of following code snippet
 - **login.html, login.css, login.js** is for handling login modal and it loaded via [jQuery load() function](http://api.jquery.com/load/)
 
 
+# Usage
 
+We supports all [ECMAScript 5 compliant browsers](http://caniuse.com/#feat=es5), because vue depends on ECMAScript 5 features that are un-shimmable in IE8.
