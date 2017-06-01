@@ -1,6 +1,6 @@
 [Working Demo](https://nobleminsu.github.io)
 
-KAIST HCI 2017 Spring Project Sagam
+> KAIST HCI 2017 Spring Project Sagam
 
 **Project Sagam** aims at redesigning **fix request delivering** experience of KAIST house parents. We implemented only Sagam's interface, not students and other staff's interface.
 
@@ -8,8 +8,15 @@ KAIST HCI 2017 Spring Project Sagam
 
 First you need to clone or download this repository
 
-```sh
-git clone https://github.com/nobleminsu/nobleminsu.github.io.git
+```bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
 ```
 
 Open index.html with browser to see our results.
@@ -37,4 +44,4 @@ and part of following code snippet
 
 # Usage
 
-We supports all [ECMAScript 5 compliant browsers](http://caniuse.com/#feat=es5), because vue depends on ECMAScript 5 features that are un-shimmable in IE8.
+We supports only [ECMAScript 5 compliant browsers](http://caniuse.com/#feat=es5), because vue depends on ECMAScript 5 features that are un-shimmable in IE8.
