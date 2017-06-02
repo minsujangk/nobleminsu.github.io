@@ -1,6 +1,11 @@
 <template lang="html">
   <div class="row">
     <div class="col-md-12">
+      <div class="row" style="margin-bottom:1em">
+        <div class="col-md-4 col-md-offset-4">
+          <input class="form-control" type="text" v-model="query" placeholder="여기에서 검색하세요">
+        </div>
+      </div>
       <div class="title">모든 수리 요청 기록</div>
       <table class="table">
         <thead>
@@ -12,7 +17,7 @@
           </tr>
         </thead>
         <transition-group name="list" tag="tbody">
-          <tr v-for="req in dormList(dorm)"
+          <tr v-for="req in searchedList.reverse()"
             :key="req['.key']"
             :class="{success: req.status == 'approved',
               active: req.status == 'deleted',
@@ -46,7 +51,23 @@
 import { db } from './firebase'
 
 export default {
+  data () {
+    return {
+      query: ''
+    }
+  },
   props: ['allList', 'dorm'],
+  computed: {
+    searchedList () {
+      var vm = this
+      return this.allList.filter(
+        item => (
+          item.content.indexOf(vm.query) !== -1 || 
+          item.location.indexOf(vm.query) !== -1 ) &&
+          vm.dorm === item.dorm
+      )
+    }
+  },
   methods: {
     dormList: function(dormName) {
       return this.allList.filter(x => x.dorm === dormName)
