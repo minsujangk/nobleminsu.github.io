@@ -146,12 +146,12 @@ import moment from 'moment'
 import { db } from './firebase'
 
 export default {
-  data: function() {
+  data: function () {
     return {
       content: '',
       location: '',
       currentEditingRequestKey: '',
-      deleteRequest : ''
+      deleteRequest: ''
     }
   },
   props: ['allList', 'dorm'],
@@ -173,8 +173,8 @@ export default {
         deliveryDate: moment().format('YYYY/MM/DD'),
         status: 'approved'
       })
-      content = ''
-      location = ''
+      this.content = ''
+      this.location = ''
       $('#makeNewRequest').modal('hide')
     },
     approve (key) {

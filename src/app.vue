@@ -50,7 +50,7 @@ export default {
     }
   },
   methods: {
-    newCount: function(dormName) {
+    newCount: function (dormName) {
       if (this.allList.length > 0) {
         return this.allList.filter(x => x.dorm === dormName && x.status === 'new').length
       }
