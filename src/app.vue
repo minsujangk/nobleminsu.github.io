@@ -1,25 +1,32 @@
 <template>
-  <div id="app">
-    <nav class="navbar navbar-theme">
-      <div class="container-theme">
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dormName">{{ dorm }} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li v-for="aDorm in dorms"><a @click="dorm=aDorm">{{ aDorm }}</a></li>
-            </ul>
-          </li>
-          <li class="has-hover-bottom-bar" :class="{active: mode==='current'}"><a @click="mode='current'">현재 수리 요청 목록 <span class="notification">{{newCount(dorm)}}</span> </a></li>
-          <li class="has-hover-bottom-bar" :class="{active: mode==='history'}"><a @click="mode='history'">모든 수리 요청 기록</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" role="button" data-toggle="modal" data-target="#login-modal" id="login">로그인</a></li>
-          <div id="includedContent"></div>
-        </ul>
+  <div id="app" :class="{'login-background':!isLoggedIn}">
+    <div v-if="!isLoggedIn">
+      <div class="row">
+        <div class="login-card">
+          <login :dorms="dorms" @login="selectedDorm => login(selectedDorm)"/>
+        </div>
       </div>
-    </nav>
-    <div class="container-theme">
-      <div :is="mode" :all-list="allList" :dorm="dorm"></div>
+    </div>
+    <div v-else>
+      <nav class="navbar navbar-theme">
+        <div class="container-theme">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dormName">{{ dorm }} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li v-for="aDorm in dorms"><a @click="dorm=aDorm">{{ aDorm }}</a></li>
+              </ul>
+            </li>
+            <li class="has-hover-bottom-bar" :class="{active: mode==='current'}"><a @click="mode='current'">현재 수리 요청 목록 <span class="notification">{{newCount(dorm)}}</span> </a></li>
+            <li class="has-hover-bottom-bar" :class="{active: mode==='history'}"><a @click="mode='history'">모든 수리 요청 기록</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          </ul>
+        </div>
+      </nav>
+      <div class="container-theme">
+        <div :is="mode" :all-list="allList" :dorm="dorm"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -27,12 +34,14 @@
 <script>
 import current from './current.vue'
 import history from './history.vue'
+import login from './login.vue'
 import { db } from './firebase'
 
 export default {
   name: 'app',
   data () {
     return {
+      isLoggedIn: false,
       dorm: '아름관',
       dorms: [
         '아름관',
@@ -54,11 +63,16 @@ export default {
       if (this.allList.length > 0) {
         return this.allList.filter(x => x.dorm === dormName && x.status === 'new').length
       }
+    },
+    login (selectedDorm) {
+      this.dorm = selectedDorm
+      this.isLoggedIn = true
     }
   },
   components: {
     current,
-    history
+    history,
+    login
   }
 }
 </script>
@@ -166,6 +180,20 @@ table.table tbody tr td {
 .top-action-button {
   float: right;
   margin-bottom: 10px;
+}
+
+.login-card {
+  max-width: 30vw;
+  margin: 30vh auto 0;
+  padding: 2em;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-color: white;
+}
+
+.login-background {
+  background-color: #e5e5e5;
+  height: 100vh;
 }
 
 </style>
