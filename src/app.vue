@@ -109,6 +109,10 @@ nav.navbar.navbar-theme .navbar-nav li.active {
   border-bottom: 2px solid #34515e;
 }
 
+.has-hover-bottom-bar {
+  cursor: pointer;
+}
+
 .has-hover-bottom-bar:hover {
   box-sizing: border-box;
   border-bottom: 2px solid #333;
