@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-6">
       <div style="text-align:center; float: right">
-        <a class="btn btn-primary btn-md" role="button" data-toggle="modal" data-target="#makeNewRequest">새로운 요청 추가</a>
+        <a class="btn btn-primary btn-md" role="button" data-toggle="modal" data-target="#makeNewRequest" >새로운 요청 추가</a>
       </div>
     </div>
     <div class="col-md-6">
@@ -206,6 +206,9 @@ export default {
     },
     showDeleteModal (key) {
       this.deleteRequest = this.selectRequestByKey(key)[0]
+      $('#delete_modal').on('shown.bs.modal', function(){
+        $('#delete_reason').focus()
+      })
       $('#delete_modal').modal('show')
     },
     deleteRequestByModal () {
