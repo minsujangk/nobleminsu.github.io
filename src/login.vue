@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>로그인</h1>
+    <h1> 로그인 </h1>
     <div class="radios">
       <div class="radio" v-for="aDorm in dorms" :class="{'checked': aDorm === dorm}" @click="dorm=aDorm">
         <label>
