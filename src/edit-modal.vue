@@ -42,12 +42,13 @@ export default {
       content: ''
     }
   },
-  props: ['allList', 'reqKey'],
+  props: ['allList', 'reqKey', 'sagam'],
   methods: {
     edit () {
       db.ref('request/' + this.reqKey +'/deliveryDate').set(moment().format('YYYY/MM/DD'))
       db.ref('request/' + this.reqKey +'/location').set(this.location)
       db.ref('request/' + this.reqKey +'/content').set(this.content)
+      db.ref('request/' + this.reqKey +'/sagam').set(this.sagam)
       $('#edit').modal('hide')
     }
   },

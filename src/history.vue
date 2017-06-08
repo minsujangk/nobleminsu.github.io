@@ -12,7 +12,8 @@
           <tr>
             <th width="15%">날짜</th>
             <th width="10%">위치</th>
-            <th width="50%">요청</th>
+            <th width="40%">요청</th>
+            <th width="10%">마지막 수정</th>
             <th width="25%" colspan="3">현재 상태</th>
           </tr>
         </thead>
@@ -25,6 +26,7 @@
             <td>{{req.date}}</td>
             <td>{{req.location}}</td>
             <td>{{req.content}}</td>
+            <td>{{req.sagam}}</td>
             <td>
               <span v-if="req.status == 'approved'">승인됨 - {{req.deliveryDate}}</span>
               <span v-else-if="req.status == 'deleted'">삭제됨</span>

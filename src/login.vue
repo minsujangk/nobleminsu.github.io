@@ -2,14 +2,15 @@
   <div>
     <h1> 로그인 </h1>
     <div class="radios">
-      <div class="radio" v-for="aDorm in dorms" :class="{'checked': aDorm === dorm}" @click="dorm=aDorm">
+      
+      <div class="radio" v-for="aSagam in sagamList" :class="{'checked': aSagam === sagam}" @click="sagam=aSagam">
         <label>
           <input type="radio" name="dorm">
-          {{aDorm}} 선생님
+          {{aSagam}} 선생님
         </label>
       </div>
     </div>
-    <button class="btn btn-primary" @click="$emit('login', dorm)"> 로그인 </button>
+    <button class="btn btn-primary" @click="$emit('login', sagam)"> 로그인 </button>
   </div>
 </template>
 
@@ -17,7 +18,14 @@
 export default {
   data () {
     return {
-      dorm: ''
+      sagam: '',
+      sagamList: [
+        '아름관 모모',
+        '아름관 디디',
+        '성실관 두두',
+        '진리관 가가',
+        '희망관 나나'
+      ]
     }
   },
   props: ['dorms']

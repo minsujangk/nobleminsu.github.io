@@ -25,7 +25,7 @@
         </div>
       </nav>
       <div class="container-theme">
-        <div :is="mode" :all-list="allList" :dorm="dorm"></div>
+        <div :is="mode" :all-list="allList" :dorm="dorm" :sagam="sagam"></div>
       </div>
     </div>
   </div>
@@ -50,7 +50,8 @@ export default {
         '희망관'
       ],
       mode: 'current',
-      allList: []
+      allList: [],
+      sagam: ''
     }
   },
   firebase: {
@@ -64,8 +65,9 @@ export default {
         return this.allList.filter(x => x.dorm === dormName && x.status === 'new').length
       }
     },
-    login (selectedDorm) {
-      this.dorm = selectedDorm
+    login (sagam) {
+      this.dorm = sagam.slice(0, 3)
+      this.sagam = sagam.slice(4)
       this.isLoggedIn = true
     }
   },

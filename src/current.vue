@@ -60,7 +60,7 @@
 
     </div>
 
-    <edit-modal :all-list="allList" :reqKey="currentEditingRequestKey"/>
+    <edit-modal :all-list="allList" :reqKey="currentEditingRequestKey" :sagam="sagam"/>
 
     <div class="modal fade" id="makeNewRequest" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
@@ -124,7 +124,7 @@
               <div class="form-group">
                 <label for="delete_reason" class="col-sm-2 control-label">삭제 사유</label>
                 <div class="col-sm-10">
-                  <textarea  class="form-control" name="delete_reason" id="delete_reason"></textarea>
+                  <textarea class="form-control" name="delete_reason" id="delete_reason"></textarea>
                 </div>
               </div>
               <!-- Hidden input for Key -->
@@ -154,7 +154,7 @@ export default {
       deleteRequest: ''
     }
   },
-  props: ['allList', 'dorm'],
+  props: ['allList', 'dorm', 'sagam'],
   methods: {
     dormList (dormName, statusName) {
       return this.allList.filter(
@@ -171,7 +171,8 @@ export default {
         location: this.location,
         date: moment().format('YYYY/MM/DD'),
         deliveryDate: moment().format('YYYY/MM/DD'),
-        status: 'approved'
+        status: 'approved',
+        sagam: this.sagam
       })
       this.content = ''
       this.location = ''
@@ -179,19 +180,23 @@ export default {
     },
     approve (key) {
       db.ref('request/' + key + '/status').set('approved')
+      db.ref('request/' + key + '/sagam').set(this.sagam)
     },
     approveAll () {
       var currentDormList = this.dormList(this.dorm, 'new')
       for (var i in currentDormList) {
         db.ref('request/' + currentDormList[i]['.key'] + '/status').set('approved')
+        db.ref('request/' + currentDormList[i]['.key'] + '/status').set(this.sagam)
       }
     },
     completeRequest (key) {
       db.ref('request/' + key + '/status').set('completed')
+      db.ref('request/' + key + '/sagam').set(this.sagam)
     },
     openEditModal (key) {
       this.currentEditingRequestKey = key
       $('#edit').modal('show')
+      $('#content').focus()
     },
     selectRequestByKey (key) {
       return this.allList.filter(x => x['.key'] === key)
@@ -202,7 +207,9 @@ export default {
     },
     deleteRequestByModal () {
       db.ref('request/' + this.deleteRequest['.key'] + '/status').set('deleted')
+      db.ref('request/' + this.deleteRequest['.key'] + '/sagam').set(this.sagam)
       this.deleteRequest = ''
+      $('#delete_reason').val('')
       $('#delete_modal').modal('hide')
     }
   },
