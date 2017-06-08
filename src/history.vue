@@ -13,7 +13,7 @@
             <th width="15%">날짜</th>
             <th width="10%">위치</th>
             <th width="40%">요청</th>
-            <th width="10%">마지막 수정</th>
+            <th width="10%">사감</th>
             <th width="25%" colspan="3">현재 상태</th>
           </tr>
         </thead>
