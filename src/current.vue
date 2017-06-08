@@ -191,6 +191,9 @@ export default {
     },
     openEditModal (key) {
       this.currentEditingRequestKey = key
+      $('#edit').on('shown.bs.modal', function(){
+        $('#content').focus()
+      })
       $('#edit').modal('show')
     },
     selectRequestByKey (key) {
